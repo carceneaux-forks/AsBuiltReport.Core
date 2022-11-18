@@ -404,6 +404,7 @@ function New-AsBuiltReport {
                 }
                 ('Word' -or 'HTML' -or 'Text') {
                     $Document = $AsBuiltReport | Export-Document -Path $OutputFolderPath -Format $Format -Options @{ TextWidth = 240 } -PassThru
+                    Write-Output "It worked!"
                 }
                 Default {}
             }
