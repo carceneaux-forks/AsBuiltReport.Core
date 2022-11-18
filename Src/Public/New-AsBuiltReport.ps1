@@ -398,15 +398,11 @@ function New-AsBuiltReport {
             }
         }
         Try {
-            switch ($Format) {
-                'JSON' {
+            if ($Format -contains 'JSON') {
                     $AsBuiltReport
-                }
-                ('Word' -or 'HTML' -or 'Text') {
+            } elseif (($Format -contains 'Word') -or ($Format -contains 'HTML') -or ($Format -contains 'Text')) {
                     $Document = $AsBuiltReport | Export-Document -Path $OutputFolderPath -Format $Format -Options @{ TextWidth = 240 } -PassThru
                     Write-Output "It worked!"
-                }
-                Default {}
             }
             Write-Output "$($Report.Replace("."," ")) As Built Report '$FileName' has been saved to '$OutputFolderPath'."
         } catch {
