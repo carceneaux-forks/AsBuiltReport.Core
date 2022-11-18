@@ -170,7 +170,7 @@ function New-AsBuiltReport {
             HelpMessage = 'Please provide the document output format'
         )]
         [ValidateNotNullOrEmpty()]
-        [ValidateSet('Word', 'HTML', 'Text')]
+        [ValidateSet('Word', 'HTML', 'Text', 'JSON')]
         [Array] $Format = 'Word',
 
         [Parameter(
@@ -398,7 +398,16 @@ function New-AsBuiltReport {
             }
         }
         Try {
-            $Document = $AsBuiltReport | Export-Document -Path $OutputFolderPath -Format $Format -Options @{ TextWidth = 240 } -PassThru
+            switch ($Format) {
+                'JSON' {
+                    $AsBuiltReport
+                    Exit
+                }
+                ('Word' -or 'HTML' -or 'Text') {
+                    $Document = $AsBuiltReport | Export-Document -Path $OutputFolderPath -Format $Format -Options @{ TextWidth = 240 } -PassThru
+                }
+                Default {}
+            }
             Write-Output "$($Report.Replace("."," ")) As Built Report '$FileName' has been saved to '$OutputFolderPath'."
         } catch {
             $Err = $_
