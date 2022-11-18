@@ -171,7 +171,7 @@ function New-AsBuiltReport {
         )]
         [ValidateNotNullOrEmpty()]
         [ValidateSet('Word', 'HTML', 'Text', 'JSON')]
-        [Array] $Format = 'Word',
+        [System.Collections.ArrayList] $Format = 'Word',
 
         [Parameter(
             Mandatory = $false,
