@@ -400,7 +400,8 @@ function New-AsBuiltReport {
         Try {
             if ($Format -contains 'JSON') {
                     $AsBuiltReport
-            } elseif (($Format -contains 'Word') -or ($Format -contains 'HTML') -or ($Format -contains 'Text')) {
+            }
+            if (($Format -contains 'Word') -or ($Format -contains 'HTML') -or ($Format -contains 'Text')) {
                     $Document = $AsBuiltReport | Export-Document -Path $OutputFolderPath -Format $Format -Options @{ TextWidth = 240 } -PassThru
                     Write-Output "It worked!"
             }
