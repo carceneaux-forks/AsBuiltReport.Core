@@ -395,7 +395,7 @@ function New-AsBuiltReport {
         }
         Try {
             if ($Format -contains 'JSON') {
-                $AsBuiltReport | ConvertTo-Json
+                $AsBuiltReport | ConvertTo-Json -Depth 10
                 $Format.Remove('JSON')
             }
             if (($Format -contains 'Word') -or ($Format -contains 'HTML') -or ($Format -contains 'Text')) {
