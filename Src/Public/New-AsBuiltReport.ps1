@@ -302,7 +302,7 @@ function New-AsBuiltReport {
             }
         } else {
             # If a report config hasn't been provided, check for the existance of the default JSON in the paths the user specified in base config
-            $ReportConfigFilePath =  $ReportModulePath + $DirectorySeparatorChar + "$($ReportModuleName).json"
+            $ReportConfigFilePath = $ReportModulePath + $DirectorySeparatorChar + "$($ReportModuleName).json"
 
             if (Test-Path -Path $ReportConfigFilePath) {
                 Write-Verbose -Message "Loading report configuration file from path '$ReportConfigFilePath'."
@@ -362,11 +362,9 @@ function New-AsBuiltReport {
                 # If Credential has been passed or previously created via Username/Password
                 if ($Credential) {
                     & "Invoke-$($ReportModuleName)" -Target $Target -Credential $Credential -Verbose -StylePath $true
-                }
-                elseif ($Token) {
+                } elseif ($Token) {
                     & "Invoke-$($ReportModuleName)" -Target $Target -Token $Token -Verbose -StylePath $true
-                }
-                elseif ($MFA) {
+                } elseif ($MFA) {
                     & "Invoke-$($ReportModuleName)" -Target $Target -MFA -Verbose -StylePath $true
                 }
             }
@@ -388,24 +386,20 @@ function New-AsBuiltReport {
                 # If Credential has been passed or previously created via Username/Password
                 if ($Credential) {
                     & "Invoke-$($ReportModuleName)" -Target $Target -Credential $Credential -StylePath $true
-                }
-                elseif ($Token) {
+                } elseif ($Token) {
                     & "Invoke-$($ReportModuleName)" -Target $Target -Token $Token -StylePath $true
-                }
-                elseif ($MFA) {
+                } elseif ($MFA) {
                     & "Invoke-$($ReportModuleName)" -Target $Target -MFA -StylePath $true
                 }
             }
         }
         Try {
             if ($Format -contains 'JSON') {
-                    $AsBuiltReport
-                    $Format.Remove('JSON')
+                $AsBuiltReport
+                $Format.Remove('JSON')
             }
             if (($Format -contains 'Word') -or ($Format -contains 'HTML') -or ($Format -contains 'Text')) {
-                    
                 $Document = $AsBuiltReport | Export-Document -Path $OutputFolderPath -Format $Format -Options @{ TextWidth = 240 } -PassThru
-                    Write-Output "It worked!"
             }
             Write-Output "$($Report.Replace("."," ")) As Built Report '$FileName' has been saved to '$OutputFolderPath'."
         } catch {
