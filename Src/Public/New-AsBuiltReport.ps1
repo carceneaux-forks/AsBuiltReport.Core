@@ -170,7 +170,7 @@ function New-AsBuiltReport {
             HelpMessage = 'Please provide the document output format'
         )]
         [ValidateNotNullOrEmpty()]
-        [ValidateSet('Word', 'HTML', 'Text')]
+        [ValidateSet('Word', 'HTML', 'Text', 'Json')]
         [Array] $Format = 'Word',
 
         [Parameter(
